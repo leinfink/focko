@@ -1,22 +1,25 @@
 (ns leinfink.focko.core
   (:gen-class)
   (:require
-   [leinfink.focko.engine :refer [->rect paint! strings-with-mappings]]
+   [clojure.string :as str]
+   [leinfink.focko.engine :refer [map->label ->label ->rect paint!]]
    [leinfink.focko.lanterna :as l]))
 
+(defn long-str [& xs] (str/join "\n" xs))
+
 (defn menu []
-  (strings-with-mappings
-   {:fg-color :black :bg-color :white}
-   [["         Commandant #1" [0 0]]
-    ["Aggro: 100" [1 2]]
-    ["Speed: 10" [1 3]]
-    ["Tweaks:" [1 6]]
-    ["(A) Make More Aggro" [4 8]]
-    ["(S) Make More Speedy" [4 9]]
-    ["Actions: [3/4]" [1 12]]
-    ["(M) Move" [4 14]]
-    ["(B) Build House" [4 15]]
-    ["    (P)rev | (N)ext | (E)nd" [0 -1]]]))
+  [(map->label {:pos [0 0] :fg-color :white :bg-color :black
+                 :str (long-str
+                       "Commandant #1"
+                       ""
+                       (format "Aggro: %d" 100)
+                       (format "Speed: %d" 200)
+                       ""
+                       "Tweaks:"
+                       ""
+                       "(A) Make More Aggro"
+                       "(S) Make More Speedy")})
+   (->label " (P)rev | (N)ext | (E)nd Move" [0 -1] :white :black)])
 
 (defn game-map [_]
   [(->rect [31 0] [1 40] :white)])
@@ -33,8 +36,9 @@
 (comment
 
   (run)
+
   (def f (future (run)))
-(print "hi")
+
   (shutdown-agents)
 
   ,)

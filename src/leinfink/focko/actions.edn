@@ -1,0 +1,24 @@
+{:label "Make More Aggro"
+ :keybind :a
+ :fn (fn [{{unit :active-unit} :view :as state}]
+       (update-in state [:game unit :aggro] inc))}
+
+{:label "Move Left"
+ :keybind :h
+ :fn (fn [{{unit :active-unit} :view :as state}]
+       (update-in state [:game unit :pos :x] dec))}
+
+{:label "Move Right"
+ :keybind :l
+ :fn (fn [{{unit :active-unit} :view :as state}]
+       (update-in state [:game unit :pos :x] inc))}
+
+{:label "Move Up"
+ :keybind :j
+ :fn (fn [{{unit :active-unit} :view :as state}]
+       (update-in state [:game unit :pos :y] dec))}
+
+{:label "Move Down"
+ :keybind :k
+ :fn (fn [{{unit :active-unit} :view :as state}]
+       (update-in state [:game unit :pos :y] inc))}
