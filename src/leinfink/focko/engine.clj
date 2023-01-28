@@ -23,6 +23,9 @@
 (defmethod draw! rect [tgx {:keys [pos size color]}]
   (l/put-rect tgx pos size color))
 
+(defn translate [object [dx dy]]
+  (update object :pos (fn [[x y]] [(+ x dx) (+ y dy)])))
+
 (defn paint! [scr objects]
   (l/clear scr)
   (let [tgx (l/create-graphics scr)]

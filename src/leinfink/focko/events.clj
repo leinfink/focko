@@ -14,13 +14,6 @@
   (map->label {:str (label-keybind label keybind)
                :pos pos}))
 
-(def aggro-event {:label "Make More Aggro"
-                  :keybind :a
-                  :fn (fn [{{unit :active-unit} :view :as state}]
-                        (update-in state [:game unit :aggro] inc))
-                  :success "got more aggro."
-                  :failure "couldn't get more aggro."})
-
 (defn eventlabels-from-file [file]
   (->> (edn/read-string (slurp file))
        (map-indexed (fn [idx val] (event-label val [0 idx])))))
