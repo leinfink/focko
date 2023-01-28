@@ -6,8 +6,9 @@
    [leinfink.focko.engine :refer [map->label]]))
 
 (defn label-keybind [label keybind]
-  (let [key (str/capitalize (str (symbol keybind)))]
-    (str/replace-first label key (str "(" key ")"))))
+  (let [key (str/capitalize (str (symbol keybind)))
+        key-desc (str "[" key "]")]
+    (str key-desc " " (str/replace-first label key key-desc))))
 
 (defn event-label [{:keys [label keybind]} pos]
   (map->label {:str (label-keybind label keybind)

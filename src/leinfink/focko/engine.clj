@@ -27,6 +27,5 @@
   (l/clear scr)
   (let [tgx (l/create-graphics scr)]
     (doseq [obj objects]
-      (print objects)
       (draw! tgx obj)))
   (l/refresh scr))
