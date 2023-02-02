@@ -5,6 +5,9 @@
    [clojure.string :as str]
    [leinfink.focko.engine :refer [map->label]]))
 
+(defn read-events-from-file [file]
+  (edn/read-string (slurp file)))
+
 (defn label-keybind [label keybind]
   (let [key (str/capitalize (str (symbol keybind)))
         key-desc (str "[" key "]")]
@@ -14,6 +17,9 @@
   (map->label {:str (label-keybind label keybind)
                :pos pos}))
 
-(defn eventlabels-from-file [file]
-  (->> (edn/read-string (slurp file))
-       (map-indexed (fn [idx val] (event-label val [0 idx])))))
+(defn eventlabels [events]
+  (map-indexed (fn [idx val] (event-label val [0 idx])) events))
+
+(defn process-input [input events]
+  (when-let [event (some #(when (= input (:keybind %)) %) events)]
+    (load-string (str (:fn event)))))

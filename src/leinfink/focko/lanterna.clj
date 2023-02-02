@@ -60,7 +60,9 @@
    (.fillRectangle tgx (position x y) (size width height) \space)))
 
 (defn read-input [screen]
-  (.readInput screen))
+  (let [keystroke (.readInput screen)]
+    (str (.getCharacter keystroke)))
+  )
 
 (comment
 

@@ -26,6 +26,8 @@
 (defn translate [object [dx dy]]
   (update object :pos (fn [[x y]] [(+ x dx) (+ y dy)])))
 
+(defn read-input [scr] (keyword (l/read-input scr)))
+
 (defn paint! [scr objects]
   (l/clear scr)
   (let [tgx (l/create-graphics scr)]

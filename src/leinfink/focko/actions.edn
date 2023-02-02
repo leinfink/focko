@@ -8,19 +8,23 @@
  {:label "Move Left"
   :keybind :h
   :fn (fn [{{unit :active-unit} :view :as state}]
-        (update-in state [:game unit :pos :x] dec))}
+        (update-in state [:game unit :pos 0] dec))}
 
  {:label "Move Right"
   :keybind :l
   :fn (fn [{{unit :active-unit} :view :as state}]
-        (update-in state [:game unit :pos :x] inc))}
+        (update-in state [:game unit :pos 0] inc))}
 
  {:label "Move Up"
   :keybind :j
   :fn (fn [{{unit :active-unit} :view :as state}]
-        (update-in state [:game unit :pos :y] dec))}
+        (update-in state [:game unit :pos 1] dec))}
 
  {:label "Move Down"
   :keybind :k
   :fn (fn [{{unit :active-unit} :view :as state}]
-        (update-in state [:game unit :pos :y] inc))}]
+        (update-in state [:game unit :pos 1] inc))}
+
+ {:label "Exit"
+  :keybind :x
+  :fn (shutdown-agents)}]
